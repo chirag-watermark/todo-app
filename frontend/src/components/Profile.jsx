@@ -12,7 +12,8 @@ import {
   Calendar,
   Clock,
   CheckCircle,
-  Circle
+  Circle,
+  ArrowLeft
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -176,7 +177,6 @@ export function Profile() {
     }));
   };
 
-
   const handleSaveProfile = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -329,6 +329,17 @@ export function Profile() {
       <Navbar user={user} />
       
       <div className="w-full max-w-7xl mx-auto pt-4">
+        {/* Back Button */}
+        <div className="p-4 pb-2">
+          <button
+            onClick={() => navigate("/homepage")}
+            className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors mb-4"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span className="text-sm font-medium">Back to Homepage</span>
+          </button>
+        </div>
+        
         <div className="p-4">
           <h2 className="text-xl font-semibold text-gray-800 mb-3">Dashboard Analytics</h2>
         </div>

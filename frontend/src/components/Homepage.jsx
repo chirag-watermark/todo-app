@@ -29,7 +29,7 @@ export function Homepage() {
       return;
     }
     fetchTasks();
-  }, [user, navigate]);
+  }, [navigate]);
 
   const fetchTasks = async () => {
     try {
@@ -90,7 +90,7 @@ export function Homepage() {
       console.error("Error deleting task:", error);
       toast.error(error.message || "Failed to delete task. Please try again.");
       // Refresh tasks to ensure UI is in sync
-      fetchTasks();
+      // fetchTasks();
     }
   };
 
@@ -136,6 +136,17 @@ export function Homepage() {
       // Refresh tasks to ensure UI is in sync
       fetchTasks();
     }
+  };
+
+  const countTasksDueToday = (tasks) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return tasks.filter(task => {
+      const taskDate = task.dueDate;
+      const taskDateObj = new Date(taskDate);
+      taskDateObj.setHours(0, 0, 0, 0);
+      return taskDateObj.getTime() === today.getTime();
+    }).length;
   };
 
   // Search functionality commented out
@@ -226,7 +237,7 @@ export function Homepage() {
                   </div>
                   <div className="text-right">
                     <p className="text-xl font-bold text-gray-900">{filteredTasks.length}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-600">
                       Total Tasks
                     </p>
                   </div>
@@ -246,7 +257,7 @@ export function Homepage() {
                     <p className="text-xl font-bold text-gray-900">
                       {filteredTasks.filter(task => task.status === "Completed").length}
                     </p>
-                    <p className="text-sm text-gray-500">Completed</p>
+                    <p className="text-sm text-gray-600">Completed</p>
                   </div>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
@@ -269,7 +280,7 @@ export function Homepage() {
                     <p className="text-xl font-bold text-gray-900">
                       {filteredTasks.filter(task => task.status !== "Completed").length}
                     </p>
-                    <p className="text-sm text-gray-500">Pending</p>
+                    <p className="text-sm text-gray-600">Pending</p>
                   </div>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
@@ -290,22 +301,17 @@ export function Homepage() {
                   </div>
                   <div className="text-right">
                     <p className="text-xl font-bold text-gray-900">
-                      {filteredTasks.filter(task => {
-                        const today = new Date().toISOString().split('T')[0];
-                        return task.dueDate === today;
-                      }).length}
+                      {countTasksDueToday(filteredTasks)}
                     </p>
-                    <p className="text-sm text-gray-500">Due Today</p>
+                    <p className="text-sm text-gray-600">Due Today</p>
                   </div>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
                     className="bg-purple-600 h-2 rounded-full" 
                     style={{ 
-                      width: `${filteredTasks.length > 0 ? (filteredTasks.filter(task => {
-                        const today = new Date().toISOString().split('T')[0];
-                        return task.dueDate === today;
-                      }).length / filteredTasks.length) * 100 : 0}%` 
+                      width: `${countTasksDueToday(filteredTasks) / filteredTasks.length * 100}%` 
+                      
                     }}
                   ></div>
                 </div>

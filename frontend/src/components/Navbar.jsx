@@ -83,15 +83,29 @@ const Navbar = ({ user }) => {
           </div>
 
           {/* Dark Mode Icon */}
-          <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-            <FiMoon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-          </button>
+          <div className="relative">
+            <button 
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+              onClick={() => toast.info("Coming Soon")}
+              aria-label="Dark mode toggle - coming soon"
+              title="Dark mode toggle - coming soon"
+            >
+              <FiMoon className="h-5 w-5 text-gray-700 dark:text-gray-200" />
+            </button>
+            {/* Coming Soon Badge */}
+            <div className="absolute -top-1 -right-1 bg-orange-700 text-white text-xs px-1.5 py-0.5 rounded-full font-semibold shadow-sm">
+              Soon
+            </div>
+          </div>
           
           {/* User Profile Dropdown */}
           <div className="relative">
             <button 
               className="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition"
               onClick={toggleDropdown}
+              aria-label={`User menu for ${user?.name || user?.username || 'User'}`}
+              aria-expanded={isDropdownOpen}
+              aria-haspopup="true"
             >
               {/* Avatar with user's first letter */}
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
@@ -121,6 +135,7 @@ const Navbar = ({ user }) => {
                   <button 
                     className="flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                     onClick={() => handleProfile()}
+                    aria-label="View profile"
                   >
                     <FiUser className="mr-3 h-4 w-4" />
                     Profile
@@ -130,8 +145,9 @@ const Navbar = ({ user }) => {
                   <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
                   
                   <button 
-                    className="flex items-center w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                    className="flex items-center w-full px-4 py-2 text-sm text-red-700 dark:text-red-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                     onClick={handleLogout}
+                    aria-label="Sign out of account"
                   >
                     <FiLogOut className="mr-3 h-4 w-4" />
                     Logout

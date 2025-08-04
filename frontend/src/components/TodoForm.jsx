@@ -162,6 +162,8 @@ const TodoForm = ({ editingTask, onEditComplete }) => {
               <div className="flex gap-2">
                 <select
                   value={newTodo.status}
+                  aria-label="Status"
+                  title="Status"
                   onChange={(e) =>
                     setNewTodo({ ...newTodo, status: e.target.value })
                   }
@@ -174,6 +176,8 @@ const TodoForm = ({ editingTask, onEditComplete }) => {
 
                 <select
                   value={newTodo.priority}
+                  aria-label="Priority"
+                  title="Priority"
                   onChange={(e) =>
                     setNewTodo({ ...newTodo, priority: e.target.value })
                   }
@@ -189,6 +193,8 @@ const TodoForm = ({ editingTask, onEditComplete }) => {
                 <input
                   type="date"
                   value={newTodo.dueDate}
+                  aria-label="Due date"
+                  title="Due date"
                   onChange={(e) =>
                     setNewTodo({ ...newTodo, dueDate: e.target.value })
                   }

@@ -11,7 +11,7 @@ Mongoid.configure do
   # configuration, whenever possible, but if you prefer, you can set
   # configuration values here, instead:
 
-  Mongoid.logger.level = Logger::FATAL
+  # Mongoid.logger.level = Logger::FATAL
 
   # 
   #   config.log_level = :debug

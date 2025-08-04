@@ -4,7 +4,7 @@ development:
     # Defines the default client. (required)
     default:
       # Mongoid can connect to a URI accepted by the driver:
-      # uri:  mongodb+srv://todo:todo@cluster0.cv0v1wp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      
       uri: <%= Rails.application.credentials.dig(:mongodb, :uri) %>
 
       # Otherwise define the parameters separately.

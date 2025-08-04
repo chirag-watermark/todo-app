@@ -1,4 +1,4 @@
-import { X, Calendar, Clock, AlertCircle, CheckCircle, Edit, Trash2 } from "lucide-react";
+import { X, Calendar, AlertCircle, CheckCircle, Edit, Trash2 } from "lucide-react";
 
 const TodoDetail = ({ todo, onClose, onEdit, onDelete }) => {
   const formatDate = (dateString) => {
@@ -93,7 +93,7 @@ const TodoDetail = ({ todo, onClose, onEdit, onDelete }) => {
             <span className={`px-3 py-1 rounded-full text-sm font-medium border capitalize ${
               priorityColors[todo.priority?.toLowerCase()] || priorityColors.medium
             }`}>
-              {todo.priority || 'Medium'} Priority
+              {todo.priority || 'Medium'}
             </span>
           </div>
 
